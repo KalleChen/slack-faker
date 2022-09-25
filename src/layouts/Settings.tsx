@@ -4,7 +4,8 @@ import Input from '../components/Input'
 import { useQuoteContext } from '../contexts/QuoteContext'
 
 const Settings: React.FC = () => {
-  const { name, handleChangeName, time, handleChangeTime } = useQuoteContext()
+  const { name, handleChangeName, time, handleChangeTime, handleChangeImage } =
+    useQuoteContext()
   return (
     <div className="grid grid-cols-2 p-6 w-full gap-4 max-w-[800px]">
       <Input
@@ -20,6 +21,14 @@ const Settings: React.FC = () => {
         value={time}
         type="time"
         handleChange={handleChangeTime}
+      />
+      <Input
+        label="profile"
+        placeholder=""
+        value={undefined}
+        type="file"
+        handleChange={handleChangeImage}
+        accept="image/*"
       />
     </div>
   )

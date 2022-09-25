@@ -3,13 +3,14 @@ import React from 'react'
 interface Props {
   label: string
   placeholder: string
-  value: string
+  value: string | undefined
   type: string
   handleChange: (e: React.FormEvent<HTMLInputElement>) => void
+  accept?: string
 }
 
 const Input = (props: Props) => {
-  const { label, placeholder, value, handleChange, type } = props
+  const { label, placeholder, value, handleChange, type, accept } = props
   return (
     <div>
       <span className="block mb-2 text-sm font-medium text-gray-300">
@@ -22,6 +23,7 @@ const Input = (props: Props) => {
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        accept={accept}
       />
     </div>
   )

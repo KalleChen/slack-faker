@@ -8,7 +8,7 @@ export interface QuoteContextInterface {
   name: string
   handleChangeName: (e: React.FormEvent<HTMLInputElement>) => void
   image: File | null
-  handleChangeImage: (image: File | null) => void
+  handleChangeImage: (e: React.FormEvent<HTMLInputElement>) => void
   time: string
   handleChangeTime: (e: React.FormEvent<HTMLInputElement>) => void
 }
@@ -35,9 +35,12 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     },
     []
   )
-  const handleChangeImage = useCallback((inputImage: File | null) => {
-    setImage(inputImage)
-  }, [])
+  const handleChangeImage = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      setImage(e?.currentTarget?.files?.[0] ?? null)
+    },
+    []
+  )
   const handleChangeTime = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       setTime(e.currentTarget.value)
