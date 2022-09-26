@@ -24,6 +24,8 @@ export interface QuoteContextInterface {
   handleAddEmoji: () => void
   replyNUmber: string
   handleChangeReplyNumber: (e: React.FormEvent<HTMLInputElement>) => void
+  quote: string
+  handleChangeQuote: (e: React.FormEvent<HTMLTextAreaElement>) => void
 }
 
 const initialValue: QuoteContextInterface = {
@@ -40,6 +42,8 @@ const initialValue: QuoteContextInterface = {
   handleAddEmoji: () => {},
   replyNUmber: '0',
   handleChangeReplyNumber: () => {},
+  quote: '',
+  handleChangeQuote: () => {},
 }
 
 const QuoteContext = createContext<QuoteContextInterface>(initialValue)
@@ -53,6 +57,7 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     initialValue.emojiNUmberList
   )
   const [replyNUmber, setReplyNUmber] = useState(initialValue.replyNUmber)
+  const [quote, setQuote] = useState(initialValue.quote)
 
   const handleChangeName = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -104,6 +109,12 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     },
     []
   )
+  const handleChangeQuote = useCallback(
+    (e: React.FormEvent<HTMLTextAreaElement>) => {
+      setQuote(e.currentTarget.value)
+    },
+    []
+  )
   const contextValues: QuoteContextInterface = {
     name,
     profile,
@@ -118,6 +129,8 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     replyNUmber,
     handleChangeReplyNumber,
     handleAddEmoji,
+    quote,
+    handleChangeQuote,
   }
 
   return (

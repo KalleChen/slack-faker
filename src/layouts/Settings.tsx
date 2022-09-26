@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Input from '../components/Input'
+import TextArea from '../components/TextArea'
 import { useQuoteContext } from '../contexts/QuoteContext'
 
 const Settings: React.FC = () => {
@@ -16,6 +17,8 @@ const Settings: React.FC = () => {
     replyNUmber,
     handleChangeReplyNumber,
     handleAddEmoji,
+    quote,
+    handleChangeQuote,
   } = useQuoteContext()
   return (
     <div className="grid grid-cols-2 p-6 w-full gap-4 max-w-[800px]">
@@ -48,6 +51,14 @@ const Settings: React.FC = () => {
         type="number"
         handleChange={handleChangeReplyNumber}
       />
+      <div className="col-start-1 col-end-3">
+        <TextArea
+          label="Quote ( \n means new quote )"
+          placeholder="Your Quote"
+          value={quote}
+          handleChange={handleChangeQuote}
+        />
+      </div>
       {emojiNUmberList.map((emojiNumber, index) => (
         <React.Fragment key={index}>
           <Input
