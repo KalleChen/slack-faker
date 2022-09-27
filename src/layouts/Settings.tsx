@@ -53,7 +53,7 @@ const Settings: React.FC = () => {
       />
       <div className="col-start-1 col-end-3">
         <TextArea
-          label="Quote ( \n means new quote )"
+          label="Quote ( ${new-line} means new line ${new-quote} means new quote )"
           placeholder="Your Quote"
           value={quote}
           handleChange={handleChangeQuote}

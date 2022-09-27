@@ -4,6 +4,7 @@ import React from 'react'
 
 import { QuoteContextProvider } from './contexts/QuoteContext'
 import Settings from './layouts/Settings'
+import SlackQuote from './layouts/SlackQuote'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           Slack Faker
         </div>
         <Settings />
+        <SlackQuote />
       </div>
     </QuoteContextProvider>
   )
