@@ -11,19 +11,20 @@ export interface QuoteContextInterface {
   handleChangeProfile: (e: React.FormEvent<HTMLInputElement>) => void
   time: string
   handleChangeTime: (e: React.FormEvent<HTMLInputElement>) => void
-  emojiList: Array<File | boolean>
+  emojiList: Array<File | boolean>[]
   handleChangeEmojiList: (
     e: React.FormEvent<HTMLInputElement>,
+    quoteIndex: number,
     index: number
   ) => void
-  emojiNumberList: string[]
+  emojiNumberList: string[][]
   handleChangeEmojiNumberList: (
     e: React.FormEvent<HTMLInputElement>,
+    quoteIndex: number,
     index: number
   ) => void
-  handleAddEmoji: () => void
-  quoteNumber: string
-  handleChangeQuoteNumber: (e: React.FormEvent<HTMLInputElement>) => void
+  handleAddEmoji: (quoteIndex: number) => void
+  handleAddQuoteNumber: () => void
   quoteList: string[]
   handleChangeQuote: (
     e: React.FormEvent<HTMLTextAreaElement>,
@@ -38,13 +39,12 @@ const initialValue: QuoteContextInterface = {
   handleChangeProfile: () => {},
   time: '00:00:00',
   handleChangeTime: () => {},
-  emojiList: [],
+  emojiList: [[]],
   handleChangeEmojiList: () => {},
-  emojiNumberList: [],
+  emojiNumberList: [[]],
   handleChangeEmojiNumberList: () => {},
   handleAddEmoji: () => {},
-  quoteNumber: '1',
-  handleChangeQuoteNumber: () => {},
+  handleAddQuoteNumber: () => {},
   quoteList: [''],
   handleChangeQuote: () => {},
 }
@@ -56,10 +56,9 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
   const [profile, setProfile] = useState(initialValue.profile)
   const [time, setTime] = useState(initialValue.time)
   const [emojiList, setEmojiList] = useState(initialValue.emojiList)
-  const [emojiNumberList, setEmojiNUmberList] = useState(
+  const [emojiNumberList, setEmojiNumberList] = useState(
     initialValue.emojiNumberList
   )
-  const [quoteNumber, setquoteNumber] = useState(initialValue.quoteNumber)
   const [quoteList, setQuoteList] = useState(initialValue.quoteList)
 
   const handleChangeName = useCallback(
@@ -75,30 +74,46 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     []
   )
   const handleChangeEmojiList = useCallback(
-    (e: React.FormEvent<HTMLInputElement>, index: number) => {
+    (
+      e: React.FormEvent<HTMLInputElement>,
+      quoteIndex: number,
+      index: number
+    ) => {
       const file = e?.currentTarget?.files?.[0] ?? false
       setEmojiList((prev) => {
         const newEmojiList = [...prev]
-        newEmojiList[index] = file
+        newEmojiList[quoteIndex][index] = file
         return newEmojiList
       })
     },
     []
   )
   const handleChangeEmojiNumberList = useCallback(
-    (e: React.FormEvent<HTMLInputElement>, index: number) => {
+    (
+      e: React.FormEvent<HTMLInputElement>,
+      quoteIndex: number,
+      index: number
+    ) => {
       const value = e?.currentTarget?.value || '0'
-      setEmojiNUmberList((prev) => {
-        const newEmojiNUmberList = [...prev]
-        newEmojiNUmberList[index] = value
-        return newEmojiNUmberList
+      setEmojiNumberList((prev) => {
+        const newEmojiNumberList = [...prev]
+        newEmojiNumberList[quoteIndex][index] = value
+        return newEmojiNumberList
       })
     },
     []
   )
-  const handleAddEmoji = useCallback(() => {
-    setEmojiList((prev) => [...prev, false])
-    setEmojiNUmberList((prev) => [...prev, '0'])
+  const handleAddEmoji = useCallback((quoteIndex: number) => {
+    setEmojiList((prev) => {
+      const newEmojiList = JSON.parse(JSON.stringify(prev)) as typeof prev
+      newEmojiList[quoteIndex].push(false)
+      return newEmojiList
+    })
+    setEmojiNumberList((prev) => {
+      const newEmojiNUmberList = JSON.parse(JSON.stringify(prev)) as typeof prev
+      newEmojiNUmberList[quoteIndex].push('0')
+      return newEmojiNUmberList
+    })
   }, [])
   const handleChangeTime = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -106,13 +121,11 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     },
     []
   )
-  const handleChangeQuoteNumber = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      setquoteNumber(e.currentTarget.value)
-      setQuoteList((prev) => [...prev, ''])
-    },
-    []
-  )
+  const handleAddQuoteNumber = useCallback(() => {
+    setQuoteList((prev) => [...prev, ''])
+    setEmojiList((prev) => [...prev, []])
+    setEmojiNumberList((prev) => [...prev, []])
+  }, [])
   const handleChangeQuote = useCallback(
     (e: React.FormEvent<HTMLTextAreaElement>, index: number) => {
       const value = e.currentTarget.value
@@ -135,8 +148,7 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     handleChangeEmojiList,
     emojiNumberList,
     handleChangeEmojiNumberList,
-    quoteNumber,
-    handleChangeQuoteNumber,
+    handleAddQuoteNumber,
     handleAddEmoji,
     quoteList,
     handleChangeQuote,
