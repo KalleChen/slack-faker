@@ -4,7 +4,7 @@ import { useQuoteContext } from '../contexts/QuoteContext'
 import { getTime } from '../utils/functions'
 
 const SlackQuote: React.FC = () => {
-  const { quote, name, time, profile } = useQuoteContext()
+  const { quoteList, name, time, profile } = useQuoteContext()
   return (
     <div className="flex flex-row w-[500px] bg-[#191B1E] p-4">
       <img
@@ -23,9 +23,12 @@ const SlackQuote: React.FC = () => {
             {getTime(time)}
           </span>
         </div>
-        {quote.split('${new-quote}').map((q, i) => (
-          <div key={i} className={`w-full ${i !== 0 ? 'mt-2' : 'mt-0'}`}>
-            {q.split('${new-line}').map((qq, ii) => (
+        {quoteList.map((quote, index) => (
+          <div
+            key={index}
+            className={`w-full ${index !== 0 ? 'mt-2' : 'mt-0'}`}
+          >
+            {quote.split('${new-line}').map((qq, ii) => (
               <React.Fragment key={ii}>
                 {ii !== 0 && <br />}
                 {qq}

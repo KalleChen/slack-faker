@@ -11,13 +11,13 @@ const Settings: React.FC = () => {
     time,
     handleChangeTime,
     handleChangeProfile,
-    handleChangeEmojiList,
-    emojiNUmberList,
-    handleChangeEmojiNumberList,
-    replyNUmber,
-    handleChangeReplyNumber,
+    // handleChangeEmojiList,
+    // emojiNUmberList,
+    // handleChangeEmojiNumberList,
+    quoteNumber,
+    handleChangeQuoteNumber,
     handleAddEmoji,
-    quote,
+    quoteList,
     handleChangeQuote,
   } = useQuoteContext()
   return (
@@ -45,46 +45,50 @@ const Settings: React.FC = () => {
         accept="image/*"
       />
       <Input
-        label="reply number"
+        label="quote number"
         placeholder=""
-        value={replyNUmber}
+        value={quoteNumber}
         type="number"
-        handleChange={handleChangeReplyNumber}
+        handleChange={handleChangeQuoteNumber}
       />
-      <div className="col-start-1 col-end-3">
-        <TextArea
-          label="Quote ( ${new-line} means new line ${new-quote} means new quote )"
-          placeholder="Your Quote"
-          value={quote}
-          handleChange={handleChangeQuote}
-        />
-      </div>
-      {emojiNUmberList.map((emojiNumber, index) => (
-        <React.Fragment key={index}>
-          <Input
-            label={`emoji picture ${index + 1}`}
-            placeholder=""
-            value={undefined}
-            type="file"
-            handleChange={(e) => handleChangeEmojiList(e, index)}
-            accept="image/*"
-          />
-          <Input
-            label="emoji number"
-            placeholder=""
-            value={emojiNumber}
-            type="number"
-            handleChange={(e) => handleChangeEmojiNumberList(e, index)}
-          />
-        </React.Fragment>
-      ))}
-      <button
-        type="button"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 col-start-1 col-end-3"
-        onClick={handleAddEmoji}
-      >
-        Add Emoji
-      </button>
+      <React.Fragment>
+        {quoteList.map((quote, index) => (
+          <div key={index} className="col-start-1 col-end-3">
+            <TextArea
+              label={`Quote ${index + 1}` + ' ( ${new-line} means new line )'}
+              placeholder="Your Quote"
+              value={quote}
+              handleChange={(e) => handleChangeQuote(e, index)}
+            />
+          </div>
+        ))}
+        {/* {emojiNUmberList.map((emojiNumber, index) => ( */}
+        {/*   <React.Fragment key={index}> */}
+        {/*     <Input */}
+        {/*       label={`emoji picture ${index + 1}`} */}
+        {/*       placeholder="" */}
+        {/*       value={undefined} */}
+        {/*       type="file" */}
+        {/*       handleChange={(e) => handleChangeEmojiList(e, index)} */}
+        {/*       accept="image/*" */}
+        {/*     /> */}
+        {/*     <Input */}
+        {/*       label="emoji number" */}
+        {/*       placeholder="" */}
+        {/*       value={emojiNumber} */}
+        {/*       type="number" */}
+        {/*       handleChange={(e) => handleChangeEmojiNumberList(e, index)} */}
+        {/*     /> */}
+        {/*   </React.Fragment> */}
+        {/* ))} */}
+        <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 col-start-1 col-end-3"
+          onClick={handleAddEmoji}
+        >
+          Add Emoji
+        </button>
+      </React.Fragment>
     </div>
   )
 }

@@ -9,7 +9,7 @@ import SlackQuote from './layouts/SlackQuote'
 const App = () => {
   return (
     <QuoteContextProvider>
-      <div className="flex items-center flex-col">
+      <div className="flex items-center flex-col pb-10">
         <div className="text-5xl font-bold text-center mt-4 text-gray-300">
           Slack Faker
         </div>
