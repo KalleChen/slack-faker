@@ -55,9 +55,7 @@ const Settings: React.FC = () => {
           <React.Fragment key={quoteIndex}>
             <div className="col-start-1 col-end-3">
               <TextArea
-                label={
-                  `Quote ${quoteIndex + 1}` + ' ( ${new-line} means new line )'
-                }
+                label={`Quote ${quoteIndex + 1}`}
                 placeholder="Your Quote"
                 value={quote}
                 handleChange={(e) => handleChangeQuote(e, quoteIndex)}

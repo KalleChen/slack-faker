@@ -28,7 +28,7 @@ const SlackQuote: React.FC = () => {
             key={index}
             className={`w-full ${index !== 0 ? 'mt-2' : 'mt-0'}`}
           >
-            {quote.split('${new-line}').map((qq, ii) => (
+            {quote.split('\n').map((qq, ii) => (
               <React.Fragment key={ii}>
                 {ii !== 0 && <br />}
                 {qq}
