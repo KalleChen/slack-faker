@@ -24,6 +24,7 @@ export interface QuoteContextInterface {
     index: number
   ) => void
   handleAddEmoji: (quoteIndex: number) => void
+  handleRemoveEmoji: (quoteIndex: number, index: number) => void
   handleAddQuote: () => void
   handleRemoveQuote: (quoteIndex: number) => void
   quoteList: string[]
@@ -45,6 +46,7 @@ const initialValue: QuoteContextInterface = {
   emojiNumberList: [[]],
   handleChangeEmojiNumberList: () => {},
   handleAddEmoji: () => {},
+  handleRemoveEmoji: () => {},
   handleAddQuote: () => {},
   handleRemoveQuote: () => {},
   quoteList: [''],
@@ -117,6 +119,18 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
       return newEmojiNUmberList
     })
   }, [])
+  const handleRemoveEmoji = useCallback((quoteIndex: number, index: number) => {
+    setEmojiList((prev) => {
+      const newEmojiList = JSON.parse(JSON.stringify(prev)) as typeof prev
+      newEmojiList[quoteIndex].splice(index, 1)
+      return newEmojiList
+    })
+    setEmojiNumberList((prev) => {
+      const newEmojiNUmberList = JSON.parse(JSON.stringify(prev)) as typeof prev
+      newEmojiNUmberList[quoteIndex].splice(index, 1)
+      return newEmojiNUmberList
+    })
+  }, [])
   const handleChangeTime = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       setTime(e.currentTarget.value)
@@ -170,6 +184,7 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     handleAddQuote,
     handleRemoveQuote,
     handleAddEmoji,
+    handleRemoveEmoji,
     quoteList,
     handleChangeQuote,
   }

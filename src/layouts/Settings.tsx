@@ -17,6 +17,7 @@ const Settings: React.FC = () => {
     handleAddQuote,
     handleRemoveQuote,
     handleAddEmoji,
+    handleRemoveEmoji,
     quoteList,
     handleChangeQuote,
   } = useQuoteContext()
@@ -72,7 +73,10 @@ const Settings: React.FC = () => {
             </div>
             {Array.isArray(emojiNumberList[quoteIndex]) &&
               emojiNumberList[quoteIndex].map((emojiNumber, index) => (
-                <React.Fragment key={index}>
+                <div
+                  key={index}
+                  className="relative col-start-1 col-end-3 grid grid-cols-2 gap-4"
+                >
                   <Input
                     label={`emoji picture ${index + 1}`}
                     placeholder=""
@@ -92,7 +96,13 @@ const Settings: React.FC = () => {
                       handleChangeEmojiNumberList(e, quoteIndex, index)
                     }
                   />
-                </React.Fragment>
+                  <button
+                    className="absolute top-0 right-2"
+                    onClick={() => handleRemoveEmoji(quoteIndex, index)}
+                  >
+                    <span className="material-symbols-outlined">close</span>
+                  </button>
+                </div>
               ))}
             <button
               type="button"
