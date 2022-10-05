@@ -24,7 +24,8 @@ export interface QuoteContextInterface {
     index: number
   ) => void
   handleAddEmoji: (quoteIndex: number) => void
-  handleAddQuoteNumber: () => void
+  handleAddQuote: () => void
+  handleRemoveQuote: (quoteIndex: number) => void
   quoteList: string[]
   handleChangeQuote: (
     e: React.FormEvent<HTMLTextAreaElement>,
@@ -44,7 +45,8 @@ const initialValue: QuoteContextInterface = {
   emojiNumberList: [[]],
   handleChangeEmojiNumberList: () => {},
   handleAddEmoji: () => {},
-  handleAddQuoteNumber: () => {},
+  handleAddQuote: () => {},
+  handleRemoveQuote: () => {},
   quoteList: [''],
   handleChangeQuote: () => {},
 }
@@ -121,10 +123,27 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     },
     []
   )
-  const handleAddQuoteNumber = useCallback(() => {
+  const handleAddQuote = useCallback(() => {
     setQuoteList((prev) => [...prev, ''])
     setEmojiList((prev) => [...prev, []])
     setEmojiNumberList((prev) => [...prev, []])
+  }, [])
+  const handleRemoveQuote = useCallback((quoteIndex: number) => {
+    setQuoteList((prev) => {
+      const newQuoteList = [...prev]
+      newQuoteList.splice(quoteIndex, 1)
+      return newQuoteList
+    })
+    setEmojiList((prev) => {
+      const newEmojiList = [...prev]
+      newEmojiList.splice(quoteIndex, 1)
+      return newEmojiList
+    })
+    setEmojiNumberList((prev) => {
+      const newEmojiNumberList = [...prev]
+      newEmojiNumberList.splice(quoteIndex, 1)
+      return newEmojiNumberList
+    })
   }, [])
   const handleChangeQuote = useCallback(
     (e: React.FormEvent<HTMLTextAreaElement>, index: number) => {
@@ -148,7 +167,8 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
     handleChangeEmojiList,
     emojiNumberList,
     handleChangeEmojiNumberList,
-    handleAddQuoteNumber,
+    handleAddQuote,
+    handleRemoveQuote,
     handleAddEmoji,
     quoteList,
     handleChangeQuote,
