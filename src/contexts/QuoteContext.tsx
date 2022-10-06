@@ -11,7 +11,7 @@ export interface QuoteContextInterface {
   handleChangeProfile: (e: React.FormEvent<HTMLInputElement>) => void
   time: string
   handleChangeTime: (e: React.FormEvent<HTMLInputElement>) => void
-  emojiList: Array<File | boolean>[]
+  emojiList: Array<string>[]
   handleChangeEmojiList: (
     e: React.FormEvent<HTMLInputElement>,
     quoteIndex: number,
@@ -83,10 +83,11 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
       quoteIndex: number,
       index: number
     ) => {
-      const file = e?.currentTarget?.files?.[0] ?? false
+      const file = e?.currentTarget?.files?.[0]
+      const url = file ? URL.createObjectURL(file) : ''
       setEmojiList((prev) => {
-        const newEmojiList = [...prev]
-        newEmojiList[quoteIndex][index] = file
+        const newEmojiList = JSON.parse(JSON.stringify(prev)) as typeof prev
+        newEmojiList[quoteIndex][index] = url
         return newEmojiList
       })
     },
@@ -110,7 +111,7 @@ export const QuoteContextProvider: React.FC<Props> = ({ children }) => {
   const handleAddEmoji = useCallback((quoteIndex: number) => {
     setEmojiList((prev) => {
       const newEmojiList = JSON.parse(JSON.stringify(prev)) as typeof prev
-      newEmojiList[quoteIndex].push(false)
+      newEmojiList[quoteIndex].push('')
       return newEmojiList
     })
     setEmojiNumberList((prev) => {
