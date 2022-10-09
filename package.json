@@ -2,6 +2,7 @@
   "name": "slack-faker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kallechen.github.io/slack-faker",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,7 +21,8 @@
     "build": "react-scripts build",
     "test": "eslint .",
     "lint": "eslint .",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +62,7 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "gh-pages": "^4.0.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
