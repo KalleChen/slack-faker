@@ -18,7 +18,7 @@ const SlackQuote: React.FC = () => {
         alt="profile"
         className="w-12 h-12 rounded-md"
       />
-      <div className="w-full flex flex-col ml-4 relative">
+      <div className="flex grow flex-col ml-4">
         <div>
           <span className="font-bold">{name || 'name'}</span>
           <span className="font-light text-xs color=[#969696] ml-2">
@@ -28,7 +28,7 @@ const SlackQuote: React.FC = () => {
         {quoteList.map((quote, index) => (
           <div
             key={index}
-            className={`w-full ${index !== 0 ? 'mt-2' : 'mt-0'}`}
+            className={`${index !== 0 ? 'mt-2' : 'mt-0'} break-all`}
           >
             {quote.split('\n').map((qq, ii) => (
               <React.Fragment key={ii}>
