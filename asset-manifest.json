@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/slack-faker/static/css/main.dbb2215c.css",
+    "main.js": "/slack-faker/static/js/main.25875284.js",
+    "static/js/787.b73c47e0.chunk.js": "/slack-faker/static/js/787.b73c47e0.chunk.js",
+    "index.html": "/slack-faker/index.html",
+    "main.dbb2215c.css.map": "/slack-faker/static/css/main.dbb2215c.css.map",
+    "main.25875284.js.map": "/slack-faker/static/js/main.25875284.js.map",
+    "787.b73c47e0.chunk.js.map": "/slack-faker/static/js/787.b73c47e0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dbb2215c.css",
+    "static/js/main.25875284.js"
+  ]
+}
