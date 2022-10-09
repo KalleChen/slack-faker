@@ -7,12 +7,14 @@ interface Props {
   type: string
   handleChange: (e: React.FormEvent<HTMLInputElement>) => void
   accept?: string
+  className?: string
 }
 
 const Input = (props: Props) => {
-  const { label, placeholder, value, handleChange, type, accept } = props
+  const { label, placeholder, value, handleChange, type, accept, className } =
+    props
   return (
-    <div>
+    <div className={className}>
       <span className="block mb-2 text-sm font-medium text-gray-300">
         {label}
       </span>

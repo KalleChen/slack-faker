@@ -22,8 +22,9 @@ const Settings: React.FC = () => {
     handleChangeQuote,
   } = useQuoteContext()
   return (
-    <div className="grid grid-cols-2 p-6 w-full gap-4 max-w-[800px]">
+    <div className="flex flex-row flex-wrap p-6 w-full gap-4 max-w-[800px] justify-between">
       <Input
+        className="w-[48%]"
         label="name"
         placeholder="name"
         value={name}
@@ -31,6 +32,7 @@ const Settings: React.FC = () => {
         handleChange={handleChangeName}
       />
       <Input
+        className="w-[48%]"
         label="time"
         placeholder=""
         value={time}
@@ -38,6 +40,7 @@ const Settings: React.FC = () => {
         handleChange={handleChangeTime}
       />
       <Input
+        className="w-[48%]"
         label="profile"
         placeholder=""
         value={undefined}
@@ -47,7 +50,7 @@ const Settings: React.FC = () => {
       />
       <button
         type="button"
-        className="h-3/5 mt-7 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w"
+        className="w-[48%] h-3/5 mt-7 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w"
         onClick={handleAddQuote}
       >
         Add Quote
@@ -55,7 +58,7 @@ const Settings: React.FC = () => {
       <React.Fragment>
         {quoteList.map((quote, quoteIndex) => (
           <React.Fragment key={quoteIndex}>
-            <div className="col-start-1 col-end-3 relative">
+            <div className="w-full">
               <TextArea
                 label={`Quote ${quoteIndex + 1}`}
                 placeholder="Your Quote"
@@ -75,7 +78,7 @@ const Settings: React.FC = () => {
               emojiNumberList[quoteIndex].map((emojiNumber, index) => (
                 <div
                   key={index}
-                  className="relative col-start-1 col-end-3 grid grid-cols-2 gap-4"
+                  className="relative w-full grid grid-cols-2 gap-4"
                 >
                   <Input
                     label={`emoji picture ${index + 1}`}
@@ -106,7 +109,7 @@ const Settings: React.FC = () => {
               ))}
             <button
               type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 col-start-1 col-end-3"
+              className="mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               onClick={() => handleAddEmoji(quoteIndex)}
             >
               Add Emoji
